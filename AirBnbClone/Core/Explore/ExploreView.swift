@@ -9,7 +9,21 @@ import SwiftUI
 
 struct ExploreView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            ScrollView{
+                LazyVStack(spacing : 32){
+                    
+                    ForEach(0 ... 10 , id: \.self ){ _ in
+                        
+                       ListingView()
+                            .frame(width: .infinity, height: 400)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    
+                    
+                }.padding()
+            }
+        }
     }
 }
 
