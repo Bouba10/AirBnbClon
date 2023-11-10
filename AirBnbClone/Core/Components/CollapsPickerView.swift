@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct CollapsPickerView: View {
+    
+    var title :         String = "xxx"
+    var description:    String = " yyyy"
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            
+            HStack{
+                Text(title)
+                    .foregroundStyle(.gray)
+                
+                Spacer()
+                
+                Text(description)
+            }
+            .font(.headline)
+            .fontWeight(.semibold)
+        }
+//        .padding()
+//        .background(.white)
+//        .clipShape(RoundedRectangle(cornerRadius: 12))
+//       
+//        .padding()
+//        .shadow(radius: 10)
     }
 }
 

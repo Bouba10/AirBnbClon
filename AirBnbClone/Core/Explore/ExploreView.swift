@@ -8,23 +8,46 @@
 import SwiftUI
 
 struct ExploreView: View {
+    @State  private var isShowDestinationSearchView = false
+    
     var body: some View {
+        
         NavigationStack{
-            ScrollView{
-                SearchAndFilterBar()
-                
-                LazyVStack(spacing : 32){
+            if self.isShowDestinationSearchView {
+                DestinationSearchView(isHiddeDestinationSearchView: self.$isShowDestinationSearchView)
+            }else{
+                 
+                ScrollView{
+                    SearchAndFilterBar()
+                        .onTapGesture {
+                            withAnimation(.snappy) {
+                                self.isShowDestinationSearchView.toggle()
+                            }
+                        }
                     
-                    ForEach(0 ... 10 , id: \.self ){ _ in
+                    LazyVStack(spacing : 32){
                         
-                       ListingView()
-                            .frame(width: .infinity, height: 400)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
-                    
-                    
-                }.padding()
+                        ForEach(0 ... 10 , id: \.self ){ listing in
+                            
+                            NavigationLink(value: listing) {
+                                ListingView()
+                                     .frame(width: .infinity, height: 400)
+                                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                            }
+                        }
+                        
+                        
+                        
+                    }.padding()
+                }
+                .navigationDestination(for: Int.self) { listing  in
+                    ListingDetailView()
+                        .navigationBarBackButtonHidden()
+                }
             }
+            
+          
+           
         }
     }
 }
